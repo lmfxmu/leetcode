@@ -1,17 +1,10 @@
-import java.util.*;
-
-public class Main {
-    public static void main(String[] args) {
-
-        int[][] nums = {{0,0,2},{1,1,1}};
-        Solution ans = new Solution();
-        ans.separateSquares(nums);
-        // System.out.println(s.groupAnagrams(strs));
-    }
-}
+// 第一次只能想到浮点二分，首先可以肯定的是关于面积的计算肯定需要优化
+// 其他题解有的非常巧妙，比如利用题目信息从浮点二分变成整数二分
+// 还有使用差分+扫描线的方法，不过有一个很巧妙的是首先找到某个区域变换
+// 区间，答案必在其中那就可以直接算出来了。
 
 
-// 浮点二分
+// 介于时间，只写了浮点二分，并且面积算错了，回头再写
 class Solution {
     public double separateSquares(int[][] squares) {
         int n = squares.length;
@@ -35,14 +28,12 @@ class Solution {
         return mid;
 
     }
-    // 面积算错了
     public double check (double target, int[][] squares) {
         double sum = 0;
         for (int i = 0; i < squares.length; i++) {
             double tmp = (squares[i][2]) * Math.min(Math.abs(target - squares[i][1]), (squares[i][2]));
             sum += tmp * (target > squares[i][1] ? 1 : -1);
         }
-        System.out.println("target:" + target + "  当前结果:"+sum);
         return sum; 
     }
 }
